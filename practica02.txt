@@ -1,0 +1,94 @@
+# Practica 2.1 Analisis de selectores #
+Para ver el fuente de las distintas paginas, en google-chrome se hace con la combinacion de teclas control + u
+Ejemplo 1:
+Linea 7: Indica que aplique a todo, que el fondo sea de color beige
+* {
+      background-color: beige;
+    }
+
+Linea 11: Indica que los parrafos tengan letra en color azul con fondo amarillo, los alinea a la izquierda.
+ p {
+      color: blue;
+      text-align: left;
+      background-color: yellow;
+    }
+
+Linea 17: Indica que a los elementos de la clase feo, le ponga las letras en color rojo y el fondo en color rosa
+.feo {
+      color: red;
+      background-color: pink;
+    }
+
+Linea 22: Indica que a los elementos de la clase inverso, le ponga las letras en blanco y el fondo en color negro
+.inverso {
+      color: white;
+      background-color: black;
+    }
+
+Linea 27: Indica que a los titulos h1, le ponga el color violeta, los alinee al centro y la fuente sea grande
+h1 {
+      color: violet;
+      text-align: center;
+      font-size: large;
+    }
+
+
+
+
+Ejemplo 2:
+Linea 8: Indica que a las clase toledo dentro de la clase españa, le asigne a las letras el color rojo
+.españa .toledo {
+      color: red;
+    }
+
+Linea 12: Indica que la clase toledo se pinta de azul. Si nos fijamos, tiene que estar en otra clase distinta de la clase españa o en ninguna clase 
+.toledo {
+      color: blue;
+    }
+
+Linea 16: Indica que la clase cuenca dentro de la clase toledo la alinee al centro
+.toledo, .cuenca {
+      text-align: center;
+    }
+
+Linea 20: Indica que la clase catilla-la-mancha tiene que tener subrayado. Esto supone que sus 'hijos' van a estar tambien subrayados
+.castilla-la-mancha {
+      text-decoration: underline;
+    }
+
+Ejemplo 3: 
+Linea 8: Indica que los elementos con identificador alfa, sean de color azul
+#alfa {
+      color: blue;
+    }
+
+Linea 12: Indica que los parrafos con identificador alfa tengan el tamaño al 200% del tamaño original
+p#alfa {
+      font-size: 200%;
+    }
+
+Linea 16: Indica que los elementos de div con identificador alpha tengan color azul
+div#alfa{
+      background-color: yellow;
+    }
+
+Linea 20: Indica que los elementos con identificador alfa qur esten dentro de div, se escriban con el estilo italic
+div #alfa{
+      font-style: italic;
+    }
+
+Ejemplo 4:
+Linea 8: Indica que la clase urjc se va a pintar con el color #CB0017
+.urjc {
+      color: #CB0017;
+    }
+
+Linea 12: Indica que la clase que contenga las clases urjc y reglamento (sin importar el orden) tengan subrayado
+.urjc.reglamento {
+      text-decoration: underline;
+    }
+
+Linea 16: Indica que las clases urjc, y todas las clases reglamento, que esten dentro de la clase urjc, tengan el fondo de color ligthblue
+.urjc, .reglamento {
+      background-color: lightblue;
+    }

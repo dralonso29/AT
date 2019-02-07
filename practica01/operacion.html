@@ -1,0 +1,92 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+    <head>
+        <title>Choose elements for your new PC</title>
+        <meta charset="utf-8">
+    </head>
+    <body>
+        <h1 id=titulo1>CustomUrPC <img src="images/pc.jpg" alt="Logo CustomUrPC" width="70" height="50"> </h1>
+        <h2>Choose items for your new PC</h2>
+        <form>
+            <fieldset>
+                <legend>
+                    Operating System
+                </legend>
+                <input type="radio" name="os" value="Windows" checked>Windows 10<br>
+                <input type="radio" name="os" value="Linux" checked>Linux Ubuntu 18.04<br>
+                <input type="radio" name="os" value="None" checked>None<br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    Motherboard
+                </legend>
+                <input type="radio" name="mb" value="Gigabyte" checked>Gigabyte GA-H110M-S2<br>
+                <input type="radio" name="mb" value="Asus" checked>Asus Rog Maximus XI Hero Wifi<br>
+                <input type="radio" name="mb" value="MSI" checked>MSI H310M Gaming Plus<br>
+                <input type="radio" name="mb" value="None" checked>None<br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    HDD
+                </legend>
+                <input type="radio" name="hdd" value="Seagate" checked>Seagate 4TB<br>
+                <input type="radio" name="hdd" value="WD" checked>WD Caviar Blue 160GB<br>
+                <input type="radio" name="hdd" value="Maxtor" checked>Maxtor M3 1TB<br>
+                <input type="radio" name="hdd" value="None" checked>None<br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    SSD
+                </legend>
+                <input type="radio" name="ssd" value="Samsung" checked>Samsung EVO 500GB<br>
+                <input type="radio" name="ssd" value="Kingston" checked>Kingston UV500 480 GB SATA3<br>
+                <input type="radio" name="ssd" value="Sandisk" checked>Sandisk Ultra 3D 500GB<br>
+                <input type="radio" name="ssd" value="None" checked>None<br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    RAM
+                </legend>
+                <input type="radio" name="ram" value="GSkill" checked>G.Skill Trident Z RGB DDR4 16GB<br>
+                <input type="radio" name="ram" value="Crucial" checked>Crucial Ballistix Sport LT White DDR4 8GB<br>
+                <input type="radio" name="ram" value="Kingston" checked>Kingston HyperX Fury Blue DDR3 8GB<br>
+                <input type="radio" name="ram" value="None" checked>None<br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    Graphic Card
+                </legend>
+                <input type="radio" name="gc" value="EVGA" checked>EVGA GeForce RTX 2080 XC Ultra Gaming 8GB GDDR6<br>
+                <input type="radio" name="gc" value="MSI" checked>MSI GeForce RTX 2070 Gaming 8GB GDDR6<br>
+                <input type="radio" name="gc" value="Asus" checked>Asus Turbo GeForce RTX 2060 Auto-Extreme 6GB GDDR6<br>
+                <input type="radio" name="gc" value="None" checked>None<br>
+            </fieldset>
+            <br>
+            <fieldset>
+                <legend>
+                    Power Supply
+                </legend>
+                <input type="radio" name="ps" value="EVGA" checked>EVGA Supernova G3 750W 80 Plus Gold Modular<br>
+                <input type="radio" name="ps" value="SilverStone" checked>SilverStone ST60F-ES230 600W 80 Plus<br>
+                <input type="radio" name="ps" value="Aerocool" checked>Aerocool Xpredator 1000GM<br>
+                <input type="radio" name="ps" value="None" checked>None<br>
+            </fieldset>
+            <br>
+            Choose your favorite color for the box:
+            <input type="color" name="boxcolor"><br>
+            Choose delivery service:
+            <select name="delivery">
+                <option value="DHL">DHL</option>
+                <option value="AS">American Express</option>
+                <option value="GDS">GDS</option>
+            </select><br><br>
+            <textarea name="suggest" rows="10" cols="45">Write suggestions or questions:</textarea><br>
+            <input type="submit">
+        </form>
+    </body>
+</html>

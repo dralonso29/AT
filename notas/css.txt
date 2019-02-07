@@ -1,0 +1,9 @@
+# Anotaciones de css #
+Una regla puede aplicar a varios elementos
+Si un elemento tiene un atributo css, todos sus hijos lo "heredan"
+Hay que tener claro: espacio (significa inclusion. Uno dentro de otro), coma (, significa 'y'), punto (. que significa clase), sostenido (# significa identificador)
+El asterisco *, significa que esa regla se aplica a todos los elementos del html
+Lorem ipsum
+
+Con el punto y a continuacion una clase, se aplica a todos lo atributos que pertenezcan a esa clase (transparencia 16)
+

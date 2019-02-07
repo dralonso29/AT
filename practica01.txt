@@ -1,0 +1,23 @@
+nombre: David Rodriguez Alonso
+login: alonsod
+
+He cogido tres paginas importantes para ver los errores html que tienen.
+La primera es: YOUTUBE
+Los errores que mas destacan son de que en la etiqueta style no se permiten el atributo "name": Error: Attribute name not allowed on element style at this point.
+Otro error bastante repetido es el siguiente: Error: An element with the attribute role=menuitem must not appear as a descendant of the button element.
+Por lo general son errores de cosas que no se pueden hacer o no se deberian hacer. Es posible que usen html4 y no hayan dado el salto a html5.
+Total de errores: 602
+
+Segunda pagina: SPACEX
+El primer error que sale es el siguiente: Error: X-UA-Compatible HTTP header must have the value IE=edge, was IE=Edge,chrome=1
+Para solucionarlo es bastante intuitivo en este caso.
+Otro error que salta es:  The profile attribute on the head element is obsolete. To declare which meta terms are used in the document, instead register the names as meta extensions. To trigger specific UA behaviors, use a link element instead.
+Recomienda cambiar algunos atributos que estan obsoletos.
+Total de errores: 11
+
+Tercera pagina: MINISTERIO DE EDUCACION, CULTURA Y DEPORTE
+Primer error que nos sale: Error: A meta element with an http-equiv attribute whose value is X-UA-Compatible must have a content attribute with the value IE=edge.
+Nos dice que se soluciona poniendo un atributo content con valor IE=edge
+Otro error que salta es de poner etiquetas que cierran cosas que no se han llegado a abrir: Error: No p element in scope but a p end tag seen.
+Tambien saltan errores de que hay atributos no permitidos: Error: Attribute mozallowfullscreen not allowed on element iframe at this point.
+Total de errores: 29
