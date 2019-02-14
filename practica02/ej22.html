@@ -1,0 +1,56 @@
+<!DOCTYPE html>
+<html lang="zxx">
+    <head>
+        <meta charset="utf-8">
+        <title>Ejercicio 2.2</title>
+        <style>
+        * {
+            background-color: #ccffff;
+        }
+        h1 {
+            color: black;
+            text-align: center;
+            font-size: 200%;
+        }
+        #rojo{
+            color: red;
+        }
+        .normal {
+            color: red;
+        }
+        a {
+            font-size: 300%;
+            color: green;
+            font-style:oblique;
+        }
+        .salchichon {
+            font-size: 200%;
+            color: red; /*aqui el programador podria llegar a pensar
+             que se vuelve de color rojo porque
+            lo pone en el css pero realmente es porque hereda de la clase mercado*/
+        }
+
+        </style>
+    </head>
+    <body>
+        <h1>Bienvenido a la pagina que usa css</h1>
+        <div class="normal">
+            Esta es una clase normal
+
+        </div>
+        <div class="mercado" id="rojo">
+            Este es el mercado
+            <div class="charcuteria">
+                y la clase charcuteria esta dentro de la clase mercado
+                <div class="salchichon">
+                    salchichon se pone rojo por su regla css
+                </div>
+            </div>
+        </div>
+        <div class="salchichon">
+            Aqui se se aplica el color rojo por la clase salchichon.
+        </div>
+        <a href="https://www.urjc.es">URJC</a>
+
+    </body>
+</html>

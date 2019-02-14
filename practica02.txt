@@ -92,3 +92,36 @@ Linea 16: Indica que las clases urjc, y todas las clases reglamento, que esten d
 .urjc, .reglamento {
       background-color: lightblue;
     }
+
+
++++++++++++++++++++++++++++++++++++
+Practica 2.2 Uso de selectores
+He definido varias reglas:
+1a Regla: Todo el fondo va tomar el color #ccffff, un color como azul claro
+* {
+            background-color: #ccffff;
+        }
+
+2a Regla: Los elementos cuya etiqueta es h1 seran de color negro, centrados y al 200%
+h1 {
+            color: black;
+            text-align: center;
+            font-size: 200%;
+        }
+
+3a Regla: Los elementos que contengan el id; rojo, tomaran el color rojo. En el codigo, hay un ejemplo donde un programador podria confundirse, llegando a no saber si se esta aplicando la regla css o esta aplicandose la herencia de una clase.
+#rojo{
+            color: red;
+        }
+
+4a Regla: Todas las clases normal, se pondran de color rojo 
+.normal {
+            color: red;
+        }
+
+5a Regla: La clase salchichon tendra el 200% mas de tamaño y de color rojo. Este era el caso que adelantaba en la 3a regla. Un programador podria llegar a pensar que se esta aplicando la herencia de la clase superior, pero en realidad se esta aplicando la regla css. Lo podemos saber gracias al tamaño que adopta la nueva clase.
+.salchichon {
+            font-size: 200%;
+            color: red; 
+	}
+
