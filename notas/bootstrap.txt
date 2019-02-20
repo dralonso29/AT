@@ -1,0 +1,7 @@
+Un container define una fila.
+Cada columna de una fila se define con row; es decir, si queremos 3 columnas en una fila, meteremos en un container, un row, y dentro definiremos 3 class="col-md-4" pero de ancho 4.
+El total debe sumar 12 (por eso en el ejemplo anterior necesitamos que col-md- sea de 4 (4x3=12))
+
+Si queremos una cuadricula, estilo 3x3, necesitaremos, tres container (para tres filas), y dentro de cada container un row, que defina 3 class="col-md-4".
+
+Lo de que sea md , dependera de lo que queramos (que se apilen o no las cajas al tener una ventana mas o menos pequeña)
