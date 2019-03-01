@@ -1,0 +1,10 @@
+A la hora de declarar variables, es mejor usar let, en vez de var(variables globales).
+
+Usar el triple igual para las comparaciones en vez del doble igual (parece que hacen lo mismo, pero no es asi. El doble igual puede hacer cosas raras)
+
+var: Tener cuidado con las variables globales, porque si en una funcion modificamos uno de los parametros y resulta que se llama igual que una variable global, se modificara la variable global.
+
+El paso por referencia como tal no existe en javascript (cuidado con lo que acabo de decir de las variables globales)
+
+
+Usar siempre el modo use strict
