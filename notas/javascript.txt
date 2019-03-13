@@ -8,3 +8,5 @@ El paso por referencia como tal no existe en javascript (cuidado con lo que acab
 
 
 Usar siempre el modo use strict
+
+Lo mejor para trabajar con procesamiento de horas es trabajar con los segundos transcurridos desde el epoch.
