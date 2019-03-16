@@ -4,10 +4,12 @@ function sleep(x) {
     let first = new Date();
     let actual;
     let diff;
+    console.log(first);
     while (true) {
         actual = new Date();
         diff = actual - first;
-        if (diff >= (x*1000)) {
+        console.log(diff);
+        if (diff === (x*1000)) {
             return;
         }
     }

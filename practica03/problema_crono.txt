@@ -1,0 +1,18 @@
+alonsod@asus-i7:~/at/practica03$ while true
+> do
+> a=`node crono.js | tail -n 1`
+> echo $a
+> done
+4000
+4000
+4000
+4000
+4000
+4000
+4000
+4000
+4001
+4000
+4000
+4001
+^C
