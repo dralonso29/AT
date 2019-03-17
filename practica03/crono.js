@@ -1,19 +1,10 @@
 'use strict'
-//status = 1 --> parado
+//status = 1 --> stopped
 //status = 2 --> running
 let status;
 let btns = ["s", "p", "r"];
 let million = Math.pow(10, 6);
-let debug = false; //just switch between true or false for debugging the code
-
-// function isButton(x) {
-//     for (let btn of btns) {
-//         if (x === btn) {
-//             return true;
-//         }
-//     }
-//     return false;
-// }
+let debug = true; //just switch between true or false for debugging the code
 
 function sleep(x) {
     let first = new Date();
@@ -44,7 +35,9 @@ function formatTime(crono) {
 }
 
 function timeConverter(crono) { //convert ms to readable time
-    console.log("Dentro de timeConverter");
+    if (debug) {
+        console.log("Dentro de timeConverter");
+    }
     let aux;
     if (!Number.isNaN(crono.diff)) {
         crono.hour = Math.floor(crono.diff/(3.6*million));
@@ -55,21 +48,23 @@ function timeConverter(crono) { //convert ms to readable time
         crono.display = crono.hour + ":" + crono.minutes + ":" + crono.seconds +":" + crono.milliseconds;
 
         if (debug) {
-            console.log(crono.diff);
-            console.log("Horas", crono.hour);
-            console.log("Minutos", crono.minutes);
-            console.log("Segundos", crono.seconds);
-            console.log("Milisegundos:", crono.milliseconds);
-            console.log("Readable:", crono.display);
+            console.log("in function timeConverter: diff = ", crono.diff);
+            console.log("in function timeConverter: Horas", crono.hour);
+            console.log("in function timeConverter: Minutos", crono.minutes);
+            console.log("in function timeConverter: Segundos", crono.seconds);
+            console.log("in function timeConverter: Milisegundos:", crono.milliseconds);
+            console.log("in function timeConverter: display:", crono.display);
         }
     }
 }
 
 function btnStartStop(crono) {
-    console.log("Dentro de StartStop");
+    if (debug) {
+        console.log("Dentro de StartStop");
+    }
     switch (status) {
         case 1:
-            //starting crono
+            //(re)starting crono
             if (crono.start === null) {
                 crono.start = new Date().getTime();
             }
@@ -82,7 +77,6 @@ function btnStartStop(crono) {
             return crono;
         default:
             return crono;
-
     }
 }
 
@@ -92,27 +86,35 @@ function status1(tecla, crono) {
         case btns[0]:
             btnStartStop(crono); //creamos una variable resultado o algo asi y la devolvemos
             if (debug) {
-                console.log("status1: Has pulsado boton start/stop");
-                console.log("status1: parado: start/stop: crono.start", crono.start);
-                console.log("status1: parado: start/stop: crono.actual", crono.actual);
+                console.log("in fuction status1: Has pulsado boton start/stop");
+                console.log("in fuction status1: stopped: start/stop: crono.start", crono.start);
+                console.log("in fuction status1: stopped: start/stop: crono.actual", crono.actual);
             }
             crono.diff = crono.actual - crono.start;
             timeConverter(crono);
             break;
         case btns[1]:
-            console.log("Has pulsado boton partial");
+            //Nothing to do here...
+            if (debug) {
+                console.log("in fuction status1: stopped: Has pulsado boton partial");
+            }
             break;
         case btns[2]:
-            console.log("Has pulsado boton reset");
+            if (debug) {
+                console.log("in fuction status1: stopped: Has pulsado boton reset");
+            }
+            crono.display = "00:00:00:00";
+            crono.start = null;
+            crono.partials = [];
             break;
         default:
-            console.log("Error: boton", tecla, "no encontrado");
+            console.log("in fuction status1: Error: boton", tecla, "no encontrado");
     }
     showtime.display = crono.display;
     showtime.partials = crono.partials;
     if (debug) {
-        console.log("status1: showtime.display:", showtime.display);
-        console.log("status1: showtime.partials:", showtime.partials);
+        console.log("in fuction status1: showtime.display:", showtime.display);
+        console.log("in fuction status1: showtime.partials:", showtime.partials);
     }
     return showtime;
 }
@@ -121,34 +123,49 @@ function status2(tecla, crono) {
     let showtime = {};
     switch (tecla) {
         case btns[0]:
-            btnStartStop(crono); //creamos una variable resultado o algo asi y la devolvemos
+            btnStartStop(crono);
             if (debug) {
-                console.log("status2: Has pulsado boton start/stop");
-                console.log("status2: running: start/stop: crono.start:", crono.start);
-                console.log("status2: running: start/stop: crono.actual:", crono.actual);
+                console.log("in fuction status2: Has pulsado boton start/stop");
+                console.log("in fuction status2: running: start/stop: crono.start:", crono.start);
+                console.log("in fuction status2: running: start/stop: crono.actual:", crono.actual);
             }
             crono.diff = crono.actual - crono.start;
             timeConverter(crono);
             break;
         case btns[1]:
-            console.log("Has pulsado boton partial");
+            crono.actual = new Date().getTime();
+            crono.diff = crono.actual - crono.start;
+            timeConverter(crono);
+            crono.partials.push(crono.display);
+            crono.start = crono.actual; //update new starting time
+            if (debug) {
+                console.log("in fuction status2: Has pulsado boton partial");
+                console.log("in fuction status2: running: partial: crono.start:", crono.start);
+                console.log("in fuction status2: running: partial: crono.actual:", crono.actual);
+            }
             break;
         case btns[2]:
-            console.log("Has pulsado boton reset");
+            //Nothing to do here...
+            if (debug) {
+                console.log("in fuction status2: running: Has pulsado boton reset");
+            }
             break;
         default:
-            console.log("Error: boton", tecla, "no encontrado");
+            console.log("in fuction status2: Error: boton", tecla, "no encontrado");
     }
     showtime.display = crono.display;
     showtime.partials = crono.partials;
     if (debug) {
-        console.log("status2: showtime.display:", showtime.display);
-        console.log("status2: showtime.partials:", showtime.partials);
+        console.log("in fuction status2: showtime.display:", showtime.display);
+        console.log("in fuction status2: showtime.partials:", showtime.partials);
     }
     return showtime;
 }
 
 function aceptaTecla(tecla, crono) {
+    if (debug) {
+        console.log("in fuction aceptaTecla: Status", status, "con la tecla", tecla);
+    }
     switch (status) {
         case 1:
             return status1(tecla, crono);
@@ -159,23 +176,45 @@ function aceptaTecla(tecla, crono) {
     }
 }
 
-//acepta tecla no tiene que devolver el crono sino un objeto cuyos atributos sean display y partials
-let crono = {};
-crono.display = "00:00:00:00";
-crono.partials = [];
-crono.start = null;
-status = 1;
+function main() {
+    let crono = {};
+    crono.display = "00:00:00:00";
+    crono.partials = [];
+    crono.start = null;
+    status = 1;
+    let show = {};
 
-let sec = 3.6;
-let show = {};
+    show = aceptaTecla("s", crono);
+    console.log("main: show.display:", show.display);
+    console.log("main: show.partials", show.partials);
+    console.log("\n");
+    sleep(3.6);
 
-//console.log(aceptaTecla("s", crono));
-aceptaTecla("s", crono);
-sleep(sec);
-show = aceptaTecla("s", crono);
-console.log("Main: show.display:", show.display);
-console.log("Main: show.partials", show.partials);
+    show = aceptaTecla("p", crono);
+    console.log("main: show.display:", show.display);
+    console.log("main: show.partials", show.partials);
+    console.log("\n");
 
-show = aceptaTecla("p", crono);
-console.log("Main: show.display:", show.display);
-console.log("Main: show.partials", show.partials);
+    sleep(5);
+    show = aceptaTecla("s", crono);
+    console.log("main: show.display:", show.display);
+    console.log("main: show.partials", show.partials);
+    console.log("\n");
+
+    show = aceptaTecla("r", crono);
+    console.log("main: show.display:", show.display);
+    console.log("main: show.partials", show.partials);
+    console.log("\n");
+
+    show = aceptaTecla("s", crono);
+    console.log("main: show.display:", show.display);
+    console.log("main: show.partials", show.partials);
+    console.log("\n");
+    sleep(2.8);
+
+    show = aceptaTecla("s", crono);
+    console.log("main: show.display:", show.display);
+    console.log("main: show.partials", show.partials);
+}
+
+main();
