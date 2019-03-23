@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="utf-8">
+    <title>Modificación de un elemento (1)</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+</head>
+
+<body>
+    <h1>Velocity converter</h1>
+    <br>
+    <button id="button01">m/s</button>
+    <button id="button02">km/h</button>
+    <button id="button03">mph</button>
+    <br>
+    <div id="v_in">50</div>
+    <div id="v_out"></div>
+    <br>
+    <script>
+        $(document).ready(function() {
+            $("#button01").click(function() {
+                let v_text = $("#v_in").text() + "m/s";
+                $("#v_out").text(v_text); // text es un método, no una propiedad
+            });
+
+            $("#button02").click(function() {
+                let v_text = $("#v_in").text();
+                let v = Number(v_text);
+                v_out = converter($("#v_in"), "km/h");
+                $("#v_out").text(v_out);
+            });
+
+            $("#button03").click(function() {
+                let v_text = $("#v_in").text();
+                let v = Number(v_text);
+                v_out = v * 2.2369418519393043;
+                v_out = v_out.toFixed(2);
+                v_out = v_out + "mph";
+                $("#v_out").text(v_out);
+            });
+        });
+    </script>
+</body>
+
+</html>

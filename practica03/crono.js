@@ -4,7 +4,8 @@
 let status;
 let btns = ["s", "p", "r"];
 let million = Math.pow(10, 6);
-let debug = true; //just switch between true or false for debugging the code
+let overflow = 8.64 * Math.pow(10, 7)-1; // 23:59:59:99 hours in ms
+let debug = false; //just switch between true or false for debugging
 
 function sleep(x) {
     let first = new Date();
@@ -84,7 +85,7 @@ function status1(tecla, crono) {
     let showtime = {};
     switch (tecla) {
         case btns[0]:
-            btnStartStop(crono); //creamos una variable resultado o algo asi y la devolvemos
+            btnStartStop(crono);
             if (debug) {
                 console.log("in fuction status1: Has pulsado boton start/stop");
                 console.log("in fuction status1: stopped: start/stop: crono.start", crono.start);
@@ -111,6 +112,9 @@ function status1(tecla, crono) {
             console.log("in fuction status1: Error: boton", tecla, "no encontrado");
     }
     showtime.display = crono.display;
+    if (crono.diff >= overflow) {
+        showtime.display = "overflow";
+    }
     showtime.partials = crono.partials;
     if (debug) {
         console.log("in fuction status1: showtime.display:", showtime.display);
@@ -154,6 +158,9 @@ function status2(tecla, crono) {
             console.log("in fuction status2: Error: boton", tecla, "no encontrado");
     }
     showtime.display = crono.display;
+    if (crono.diff >= overflow) {
+        showtime.display = "overflow";
+    }
     showtime.partials = crono.partials;
     if (debug) {
         console.log("in fuction status2: showtime.display:", showtime.display);
@@ -196,6 +203,12 @@ function main() {
     console.log("\n");
 
     sleep(5);
+
+    show = aceptaTecla("p", crono);
+    console.log("main: show.display:", show.display);
+    console.log("main: show.partials", show.partials);
+    console.log("\n");
+
     show = aceptaTecla("s", crono);
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
@@ -210,11 +223,13 @@ function main() {
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
     console.log("\n");
+    
     sleep(2.8);
 
     show = aceptaTecla("s", crono);
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
+
 }
 
 main();
