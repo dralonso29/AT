@@ -1,7 +1,7 @@
 'use strict'
 
 let minus = "abcdefghijklmnñopqrstuvwxyzáéíóúçü";
-let mayus = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚÜ";
+let mayus = "ABCDEFGHIJKLMNÑOPQRSTUVWXYZÁÉÍÓÚÇÜ";
 let special = ",.-{}[]!\"·$%&/()=?¿¡'";
 let numbers = "0123456789";
 let debug = false;
@@ -26,6 +26,30 @@ function findItem(wrd, str){
     return false;
 }
 
+function have_exceptions(variable) {
+    if (debug) {
+        console.log("variable: "+ variable);
+    }
+    try {
+        if (typeof variable !== 'number') {
+            throw variable +' is not a number';
+        }
+    } catch (e) {
+        console.log('capturada excepcion: '+e);
+        return true;
+    }
+
+    try {
+        if (variable < 0) {
+            throw variable +' must be greater than zero';
+        }
+    } catch (e) {
+        console.log('capturada excepcion: '+e);
+        return true;
+    }
+    return false;
+}
+
 function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
     let w;
     let may;
@@ -35,10 +59,9 @@ function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
     let sol = true;
     let invalidchar = true;
 
-    if (typeof oklen !== 'number' || oklen < 0 || typeof minlower !== 'number' || minlower < 0
-    || typeof minupper !== 'number' || minupper < 0 || typeof minnbs !== 'number' || minnbs < 0 ||
-    typeof minsp !== 'number' || minsp < 0) {
-        return console.log("Error: Invalid arguments. Except password, params must be numbers greater than zero");
+    if (have_exceptions(oklen) || have_exceptions(minlower) || have_exceptions(minupper) ||
+        have_exceptions(minsp) ||have_exceptions(minnbs)) {
+        return;
     }
 
     for (w of passwd) {
@@ -115,30 +138,38 @@ function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
     console.log("\n");
 }
 
-let passwd = "so";
-console.log("Contraseña: ", passwd);
-passwValidator(passwd, 3, 3, 3, 3, 3);
+function main() {
+    let passwd = "so";
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, 3, 3, 3, 3, 3);
 
-passwd = "hola";
-console.log("Contraseña: ", passwd);
-passwValidator(passwd, 3, 3, 3, 3, 3);
+    passwd = "hola";
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, 3, 3, 3, 3, 3);
 
-passwd = "hola123"
-console.log("Contraseña: ", passwd);
-passwValidator(passwd, 3, 3, 3, 3, 3);
+    passwd = "hola123"
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, 3, 3, 3, 3, 3);
 
-passwd = "AAhola123$&%"
-console.log("Contraseña: ", passwd);
-passwValidator(passwd, 3, 3, 3, 3, 3);
+    passwd = "AAhola123$&%"
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, 3, 3, 3, 3, 3);
 
-passwd = "hola123PPE@["
-console.log("Contraseña: ", passwd);
-passwValidator(passwd, 3, 3, 3, 3, 3);
+    passwd = "hola123PPE@["
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, 3, 3, 3, 3, 3);
 
-passwd = "hola123PPE$%["
-console.log("Contraseña: ", passwd);
-passwValidator(passwd, 3, 3, 3, 3, 3);
+    passwd = "hola123PPE$%["
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, 3, 3, 3, 3, 3);
 
-passwd = "hola"
-console.log("Contraseña: ", passwd);
-passwValidator(passwd, "x", 3, -1, 3, 3);
+    passwd = "hola"
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, "x", 3, -1, 3, 3);
+
+    passwd = "hola"
+    console.log("Contraseña: ", passwd);
+    passwValidator(passwd, 2, 3, -1, 3, 3);
+}
+
+main();
