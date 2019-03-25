@@ -169,33 +169,17 @@ function status2(tecla, crono) {
     return showtime;
 }
 
-function params_ok(tecla) {
-    try {
-        for (let i = 0; i < btns.length; i++) {
-            if (tecla === btns[i]) {
-                return true;
-            }
-        }
-        throw "Invalid key type: "+tecla+". Must be s, p or r."
-    } catch (e) {
-        console.log('Exception: '+e);
-        return false;
-    }
-}
-
 function aceptaTecla(tecla, crono) {
     if (debug) {
         console.log("in fuction aceptaTecla: Status", status, "con la tecla", tecla);
     }
-    if(params_ok(tecla)) {
-        switch (status) {
-            case 1:
-                return status1(tecla, crono);
-            case 2:
-                return status2(tecla, crono);
-            default:
-                throw new RangeError("Status not found:", status);
-        }
+    switch (status) {
+        case 1:
+            return status1(tecla, crono);
+        case 2:
+            return status2(tecla, crono);
+        default:
+            throw new RangeError("Status not found:", status);
     }
 }
 
@@ -239,9 +223,8 @@ function main() {
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
     console.log("\n");
-
+    
     sleep(2.8);
-    show = aceptaTecla("pepe", crono); //exception
 
     show = aceptaTecla("s", crono);
     console.log("main: show.display:", show.display);
