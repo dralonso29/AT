@@ -1,0 +1,34 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="utf-8">
+    <title>Ejemplo de uso de toggleClass</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <style>
+        .oculto {
+            display: none;
+        }
+    </style>
+</head>
+
+<body>
+    <button id="boton01">Ver foto</button>
+    <div id="marco_foto" class="oculto">
+        <img src="images/URJC.png" alt="Foto URJC">
+    </div>
+    <script>
+        $(document).ready(function() {
+            $("#boton01").click(function() {
+                $("#marco_foto").toggleClass("oculto")
+                if ($("#marco_foto").attr('class')==="oculto") {
+                    $("#boton01").text("Ver foto");
+                }else {
+                    $("#boton01").text("Ocultar foto");
+                }
+            });
+        });
+    </script>
+</body>
+
+</html>
