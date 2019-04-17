@@ -58,9 +58,12 @@ function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
     let len = 0;
     let sol = true;
     let invalidchar = true;
+    let str = "";
+    let tot = 0;
 
     if (have_exceptions(oklen) || have_exceptions(minlower) || have_exceptions(minupper) ||
         have_exceptions(minsp) ||have_exceptions(minnbs)) {
+        console.log("Dentro del if de excepciones");
         return;
     }
 
@@ -70,15 +73,18 @@ function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
         }
         len++;
     };
+    tot += n;
     if (n === 0) {
         invalidchar = false;
     }
     if (len < oklen) {
-        console.log("Longitud requerida: ", oklen, ". Longitud actual: ", len);
+        //console.log("Longitud requerida: ", oklen, ". Longitud actual: ", len);
+        str = str + ("Longitud requerida: "+ oklen+ ". Longitud actual: "+ len+"\n");
         sol = false;
     }
     if (n < minlower) {
-        console.log("Minusculas requeridas: ", minlower, ". Minusculas actuales: ", n);
+        // console.log("Minusculas requeridas: ", minlower, ". Minusculas actuales: ", n);
+        str = str +("Minusculas requeridas: "+ minlower+ ". Minusculas actuales: "+ n+"\n");
         sol = false;
     }
     if (debug) {
@@ -90,16 +96,16 @@ function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
             n++;
         }
     };
-    if (n === 0) {
-        invalidchar = false;
-    }
+
     if (n < minupper) {
-        console.log("Mayusculas requeridas: ", minupper, ". Mayusculas actuales: ", n);
+        // console.log("Mayusculas requeridas: ", minupper, ". Mayusculas actuales: ", n);
+        str = str +("Mayusculas requeridas: "+ minupper+ ". Mayusculas actuales: "+ n+"\n");
         sol = false;
     }
     if (debug) {
         console.log("Numero mayusculas: ",n);
     }
+    tot += n;
     n = 0;
     for (w of passwd) {
         if(findItem(w, special)){
@@ -107,15 +113,14 @@ function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
         }
     };
     if (n < minsp) {
-        if (invalidchar) {
-            console.log("Error: password must not have invalid special characters");
-        }
-        console.log("Especiales requeridas: ", minsp, ". Especiales actuales: ", n);
+        // console.log("Especiales requeridas: ", minsp, ". Especiales actuales: ", n);
+        str = str +("Especiales requeridas: "+ minsp+ ". Especiales actuales: "+ n+"\n");
         sol = false;
     }
     if (debug) {
         console.log("Numero especiales: ",n);
     }
+    tot += n;
     n = 0;
     for (w of passwd) {
         if(findItem(w, numbers)){
@@ -126,50 +131,59 @@ function passwValidator(passwd, oklen, minlower, minupper, minnbs, minsp) {
         }
     };
     if (n < minnbs) {
-        console.log("Numeros requeridos: ", minnbs, ". Numeros actuales: ", n);
+        //console.log("Numeros requeridos: ", minnbs, ". Numeros actuales: ", n);
+        str = str +("Numeros requeridos: "+ minnbs+ ". Numeros actuales: "+ n+"\n");
         sol = false;
     }
     if (debug) {
         console.log("Numero numeros: ",n);
     }
-    if (sol) {
-        console.log("ok");
+    tot += n;
+    console.log("total: ",tot);
+    console.log("len: ",len);
+    // MIRAR SI LOS TAMAÑOS NO SON IGUALES. EN ESE CASO HAY ALGUN CARACTER INVALIDO
+    if (tot < len) {
+        str = str +("Error: password must not have invalid special characters"+"\n");
     }
-    console.log("\n");
+    if (sol) {
+        //console.log("ok");
+        str = "ok";
+    }
+    return str;
 }
 
 function main() {
-    let passwd = "so";
+    // let passwd = "so";
+    // console.log("Contraseña: ", passwd);
+    // console.log(passwValidator(passwd, 3, 3, 3, 3, 3));
+    //
+    // passwd = "hola";
+    // console.log("Contraseña: ", passwd);
+    // console.log(passwValidator(passwd, 3, 3, 3, 3, 3));
+    //
+    // passwd = "hola123"
+    // console.log("Contraseña: ", passwd);
+    // console.log(passwValidator(passwd, 3, 3, 3, 3, 3));
+    //
+    // passwd = "AAhola123$&%"
+    // console.log("Contraseña: ", passwd);
+    // console.log(passwValidator(passwd, 3, 3, 3, 3, 3));
+
+    let passwd = "hola123PPE@["
     console.log("Contraseña: ", passwd);
     passwValidator(passwd, 3, 3, 3, 3, 3);
 
-    passwd = "hola";
-    console.log("Contraseña: ", passwd);
-    passwValidator(passwd, 3, 3, 3, 3, 3);
-
-    passwd = "hola123"
-    console.log("Contraseña: ", passwd);
-    passwValidator(passwd, 3, 3, 3, 3, 3);
-
-    passwd = "AAhola123$&%"
-    console.log("Contraseña: ", passwd);
-    passwValidator(passwd, 3, 3, 3, 3, 3);
-
-    passwd = "hola123PPE@["
-    console.log("Contraseña: ", passwd);
-    passwValidator(passwd, 3, 3, 3, 3, 3);
-
-    passwd = "hola123PPE$%["
-    console.log("Contraseña: ", passwd);
-    passwValidator(passwd, 3, 3, 3, 3, 3);
-
-    passwd = "hola"
-    console.log("Contraseña: ", passwd);
-    passwValidator(passwd, "x", 3, -1, 3, 3);
-
-    passwd = "hola"
-    console.log("Contraseña: ", passwd);
-    passwValidator(passwd, 2, 3, -1, 3, 3);
+    // passwd = "hola123PPE$%["
+    // console.log("Contraseña: ", passwd);
+    // console.log(passwValidator(passwd, 3, 3, 3, 3, 3));
+    //
+    // passwd = "hola"
+    // console.log("Contraseña: ", passwd);
+    // console.log(passwValidator(passwd, "x", 3, -1, 3, 3));
+    //
+    // passwd = "hola"
+    // console.log("Contraseña: ", passwd);
+    // console.log(passwValidator(passwd, 2, 3, -1, 3, 3));
 }
 
 main();
