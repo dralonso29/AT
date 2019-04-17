@@ -1,0 +1,124 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cronometros</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/crono.js"></script>
+    <style>
+        #crono1 {
+            text-align: left;
+            float: left;
+            margin-left: 150px;
+            margin-top: 20px;
+        }
+        h1 {
+            text-align: center;
+        }
+        #crono2 {
+            text-align: right;
+            float: right;
+            margin-right: 150px;
+            margin-top: 20px;
+        }
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div>
+        <span id="crono1">
+            <h1 id="display">00:00:00:00</h1>
+            <div class="buttons">
+                <button id="reset">Reset</button>
+                <button id="ss">Start/Stop</button>
+                <button id="partial">Partial</button>
+            </div>
+            <table align="center" id="tablepartials"></table>
+        </span>
+        <span id="crono2">
+            <h1 id="display2">00:00:00:00</h1>
+            <div class="buttons2">
+                <button id="reset2">Reset</button>
+                <button id="ss2">Start/Stop</button>
+                <button id="partial2">Partial</button>
+            </div>
+            <table align="center" id="tablepartials2"></table>
+        </span>
+    </div>
+    <script>
+        $(document).ready(function() {
+            let crono = {};
+            crono.display = "00:00:00:00";
+            crono.partials = [];
+            crono.start = null;
+            crono.acumulado = 0;
+            status = 1;
+            let show = {};
+            $("#ss").click(function(){
+                showtime = aceptaTecla("s", crono);
+                //console.log("EN EL HTML: ",showtime);
+                $("#display").text(showtime.display);
+            });
+
+            $("#reset").click(function(){
+                showtime = aceptaTecla("r", crono);
+                //console.log("EN EL HTML: ",showtime);
+                $("#display").text(showtime.display);
+                $("#tablepartials").text(showtime.partials);
+            });
+
+            $("#partial").click(function(){
+                showtime = aceptaTecla("p", crono);
+                console.log("EN EL HTML: ",showtime);
+                $("#display").text(showtime.display);
+                $("#tablepartials").text([]);
+                for (let i = 0; i < showtime.partials.length; i++) {
+                    //console.log("Elemento ",i," de partials: ", showtime.partials[i]);
+                    let text;
+                    text = '<tr><td>'+showtime.partials[i]+'</td></tr>';
+                    $("#tablepartials").append(text);
+                }
+            });
+        });
+    </script>
+
+    <!-- <script>
+        let texto;
+        texto = '<tr class="hora"><td>' +moment().format() + '</td></tr>';
+        $("#tabla_horas").append(texto);
+        $(document).ready(function() {
+            let crono = {};
+            crono.display = "00:00:00:00";
+            crono.partials = [];
+            crono.start = null;
+            crono.acumulado = 0;
+            status = 1;
+            let show = {};
+            $("#ss2").click(function(){
+                showtime = aceptaTecla("s", crono);
+                console.log("EN EL HTML: ",showtime);
+                $("#display2").text(showtime.display);
+            });
+
+            $("#reset2").click(function(){
+                showtime = aceptaTecla("r", crono);
+                console.log("EN EL HTML: ",showtime);
+                $("#display2").text(showtime.display);
+                $("#tablepartials2").text(showtime.partials);
+            });
+
+            $("#partial2").click(function(){
+                showtime = aceptaTecla("p", crono);
+                console.log("EN EL HTML: ",showtime);
+                $("#display2").text(showtime.display);
+                $("#tablepartials2").text(showtime.partials);
+            });
+        });
+    </script> -->
+</body>
+
+</html>

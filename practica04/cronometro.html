@@ -1,0 +1,66 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cronometro</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="js/crono.js"></script>
+    <style>
+        div {
+            text-align: center;
+        }
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div><h1 id="display">00:00:00:00</h1></div>
+    <div class="buttons">
+        <button id="reset">Reset</button>
+        <button id="ss">Start/Stop</button>
+        <button id="partial">Partial</button>
+    </div>
+    <div class="display align"></div>
+    <table align="center" id="tablepartials"></table>
+    <script>
+    $(document).ready(function() {
+        let crono = {};
+        crono.display = "00:00:00:00";
+        crono.partials = [];
+        crono.start = null;
+        crono.acumulado = 0;
+        status = 1;
+        let show = {};
+        $("#ss").click(function(){
+            showtime = aceptaTecla("s", crono);
+            //console.log("EN EL HTML: ",showtime);
+            $("#display").text(showtime.display);
+        });
+
+        $("#reset").click(function(){
+            showtime = aceptaTecla("r", crono);
+            //console.log("EN EL HTML: ",showtime);
+            $("#display").text(showtime.display);
+            $("#tablepartials").text(showtime.partials);
+        });
+
+        $("#partial").click(function(){
+            showtime = aceptaTecla("p", crono);
+            console.log("EN EL HTML: ",showtime);
+            $("#display").text(showtime.display);
+            $("#tablepartials").text([]);
+            for (let i = 0; i < showtime.partials.length; i++) {
+                //console.log("Elemento ",i," de partials: ", showtime.partials[i]);
+                let text;
+                text = '<tr><td>'+showtime.partials[i]+'</td></tr>';
+                $("#tablepartials").append(text);
+            }
+        });
+    });
+    </script>
+</body>
+
+</html>

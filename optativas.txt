@@ -1,0 +1,2 @@
+Practica 3.6 y 3.4: crono.js y js03.js--> modo de depuracion para saber lo que ocurre en cada momento
+Practica 3.4: concateno el error total. No muestro un unico error.
