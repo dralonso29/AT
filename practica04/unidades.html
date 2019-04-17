@@ -14,26 +14,26 @@
     <button id="button02">km/h</button>
     <button id="button03">mph</button>
     <br>
+    <br>
     <div id="v_in">20</div>
     <div id="v_out"></div>
     <br>
     <script>
         $(document).ready(function() {
             $("#button01").click(function() {
-                let v_text = $("#v_in").text() + " m/s";
-                $("#v_out").text(v_text);
+                let v = $("#v_in").text();
+                v_out = converter(v, "m/s");
+                $("#v_out").text(v_out+" m/s");
             });
 
             $("#button02").click(function() {
-                let v_text = $("#v_in").text();
-                let v = Number(v_text);
+                let v = $("#v_in").text();
                 v_out = converter(v, "km/h");
                 $("#v_out").text(v_out+" km/h");
             });
 
             $("#button03").click(function() {
-                let v_text = $("#v_in").text();
-                let v = Number(v_text);
+                let v = $("#v_in").text();
                 v_out = converter(v, "mph");
                 $("#v_out").text(v_out+" mph");
             });
