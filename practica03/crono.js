@@ -44,7 +44,11 @@ function timeConverter(crono) { //convert ms to readable time
         crono.hour = Math.floor(crono.diff/(3.6*million));
         crono.minutes = Math.floor((crono.diff%(3.6*million))/60000);
         crono.seconds = Math.floor(((crono.diff%(3.6*million))%60000)/1000);
-        crono.milliseconds = Math.floor((crono.diff%1000)/100);
+        // crono.milliseconds = Math.floor((crono.diff%1000)/100);
+        crono.milliseconds = crono.diff/1000 - Math.trunc(crono.diff/1000);
+        crono.milliseconds = (crono.milliseconds+"").split(".")[1];
+        crono.milliseconds = crono.milliseconds.substring(0, 3);
+        crono.milliseconds = parseInt(crono.milliseconds);
         formatTime(crono);
         crono.display = crono.hour + ":" + crono.minutes + ":" + crono.seconds +":" + crono.milliseconds;
 
@@ -66,9 +70,8 @@ function btnStartStop(crono) {
     switch (status) {
         case 1:
             //(re)starting crono
-            if (crono.start === null) {
-                crono.start = new Date().getTime();
-            }
+            crono.start = new Date().getTime();
+            crono.actual = crono.start;
             status = 2;
             return crono;
         case 2:
@@ -81,7 +84,7 @@ function btnStartStop(crono) {
     }
 }
 
-function status1(tecla, crono) {
+function status1(tecla, crono) { //STOPPED
     let showtime = {};
     switch (tecla) {
         case btns[0]:
@@ -92,7 +95,7 @@ function status1(tecla, crono) {
                 console.log("in fuction status1: stopped: start/stop: crono.actual", crono.actual);
             }
             crono.diff = crono.actual - crono.start;
-            timeConverter(crono);
+            //timeConverter(crono);
             break;
         case btns[1]:
             //Nothing to do here...
@@ -123,7 +126,7 @@ function status1(tecla, crono) {
     return showtime;
 }
 
-function status2(tecla, crono) {
+function status2(tecla, crono) { //RUNNING
     let showtime = {};
     switch (tecla) {
         case btns[0]:
@@ -134,6 +137,11 @@ function status2(tecla, crono) {
                 console.log("in fuction status2: running: start/stop: crono.actual:", crono.actual);
             }
             crono.diff = crono.actual - crono.start;
+            console.log("in fuction status2: crono.diff: ", crono.diff);
+            crono.savediff = crono.diff;
+            crono.diff += crono.acumulado;
+            crono.acumulado += crono.savediff;
+            console.log("in fuction status2: crono.diff += crono.acumulado: ", crono.diff);
             timeConverter(crono);
             break;
         case btns[1]:
@@ -204,6 +212,7 @@ function main() {
     crono.display = "00:00:00:00";
     crono.partials = [];
     crono.start = null;
+    crono.acumulado = 0;
     status = 1;
     let show = {};
 
@@ -211,42 +220,54 @@ function main() {
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
     console.log("\n");
-    sleep(3.6);
-
-    show = aceptaTecla("p", crono);
-    console.log("main: show.display:", show.display);
-    console.log("main: show.partials", show.partials);
-    console.log("\n");
-
-    sleep(5);
-
-    show = aceptaTecla("p", crono);
-    console.log("main: show.display:", show.display);
-    console.log("main: show.partials", show.partials);
-    console.log("\n");
+    sleep(2);
 
     show = aceptaTecla("s", crono);
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
     console.log("\n");
 
-    show = aceptaTecla("r", crono);
-    console.log("main: show.display:", show.display);
-    console.log("main: show.partials", show.partials);
-    console.log("\n");
+    sleep(3);
 
     show = aceptaTecla("s", crono);
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
     console.log("\n");
 
-    sleep(2.8);
-    show = aceptaTecla("pepe", crono); //exception
+    sleep(3);
 
     show = aceptaTecla("s", crono);
     console.log("main: show.display:", show.display);
     console.log("main: show.partials", show.partials);
+    console.log("\n");
+    //
+    // show = aceptaTecla("p", crono);
+    // console.log("main: show.display:", show.display);
+    // console.log("main: show.partials", show.partials);
+    // console.log("\n");
+    //
+    // show = aceptaTecla("s", crono);
+    // console.log("main: show.display:", show.display);
+    // console.log("main: show.partials", show.partials);
+    // console.log("\n");
+    //
+    // show = aceptaTecla("r", crono);
+    // console.log("main: show.display:", show.display);
+    // console.log("main: show.partials", show.partials);
+    // console.log("\n");
+    //
+    // show = aceptaTecla("s", crono);
+    // console.log("main: show.display:", show.display);
+    // console.log("main: show.partials", show.partials);
+    // console.log("\n");
+    //
+    // sleep(2.8);
+    // show = aceptaTecla("pepe", crono); //exception
+    //
+    // show = aceptaTecla("s", crono);
+    // console.log("main: show.display:", show.display);
+    // console.log("main: show.partials", show.partials);
 
 }
 
-main();
+//main();
