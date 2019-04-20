@@ -1,7 +1,6 @@
 'use strict'
 //status = 1 --> stopped
 //status = 2 --> running
-let status;
 let btns = ["s", "p", "r"];
 let million = Math.pow(10, 6);
 let overflow = 8.64 * Math.pow(10, 7)-1; // 23:59:59:99 hours in ms
@@ -67,17 +66,17 @@ function btnStartStop(crono) {
     if (debug) {
         console.log("Dentro de StartStop");
     }
-    switch (status) {
+    switch (crono.status) {
         case 1:
             //(re)starting crono
             crono.start = new Date().getTime();
             crono.actual = crono.start;
-            status = 2;
+            crono.status = 2;
             return crono;
         case 2:
             //stopping crono
             crono.actual = new Date().getTime();
-            status = 1;
+            crono.status = 1;
             return crono;
         default:
             return crono;
@@ -95,7 +94,6 @@ function status1(tecla, crono) { //STOPPED
                 console.log("in fuction status1: stopped: start/stop: crono.actual", crono.actual);
             }
             crono.diff = crono.actual - crono.start;
-            //timeConverter(crono);
             break;
         case btns[1]:
             //Nothing to do here...
@@ -145,6 +143,7 @@ function status2(tecla, crono) { //RUNNING
             timeConverter(crono);
             break;
         case btns[1]:
+            crono.acumulado = 0;
             crono.actual = new Date().getTime();
             crono.diff = crono.actual - crono.start;
             timeConverter(crono);
@@ -193,27 +192,33 @@ function params_ok(tecla) {
 
 function aceptaTecla(tecla, crono) {
     if (debug) {
-        console.log("in fuction aceptaTecla: Status", status, "con la tecla", tecla);
+        console.log("in fuction aceptaTecla: Status", crono.status, "con la tecla", tecla);
     }
     if(params_ok(tecla)) {
-        switch (status) {
+        switch (crono.status) {
             case 1:
                 return status1(tecla, crono);
             case 2:
                 return status2(tecla, crono);
             default:
-                throw new RangeError("Status not found:", status);
+                throw new RangeError("Status not found:", crono.status);
         }
     }
 }
 
+function newCrono(){
+    let crono = {
+        display : "00:00:00:00",
+        partials : [],
+        start : null,
+        acumulado : 0,
+        status : 1,
+    };
+    return crono;
+}
+
 function main() {
-    let crono = {};
-    crono.display = "00:00:00:00";
-    crono.partials = [];
-    crono.start = null;
-    crono.acumulado = 0;
-    status = 1;
+    let crono = newCrono();
     let show = {};
 
     show = aceptaTecla("s", crono);
