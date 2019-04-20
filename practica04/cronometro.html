@@ -23,16 +23,10 @@
         <button id="ss">Start/Stop</button>
         <button id="partial">Partial</button>
     </div>
-    <div class="display align"></div>
     <table align="center" id="tablepartials"></table>
     <script>
     $(document).ready(function() {
-        let crono = {};
-        crono.display = "00:00:00:00";
-        crono.partials = [];
-        crono.start = null;
-        crono.acumulado = 0;
-        status = 1;
+        let crono = newCrono();
         let show = {};
         $("#ss").click(function(){
             showtime = aceptaTecla("s", crono);

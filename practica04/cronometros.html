@@ -51,13 +51,10 @@
     </div>
     <script>
         $(document).ready(function() {
-            let crono = {};
-            crono.display = "00:00:00:00";
-            crono.partials = [];
-            crono.start = null;
-            crono.acumulado = 0;
-            status = 1;
+            let crono = newCrono();
             let show = {};
+            let crono2 = newCrono();
+            let show2 = {};
             $("#ss").click(function(){
                 showtime = aceptaTecla("s", crono);
                 //console.log("EN EL HTML: ",showtime);
@@ -82,6 +79,26 @@
                     text = '<tr><td>'+showtime.partials[i]+'</td></tr>';
                     $("#tablepartials").append(text);
                 }
+            });
+
+            $("#ss2").click(function(){
+                showtime = aceptaTecla("s", crono2);
+                console.log("EN EL HTML: ",showtime);
+                $("#display2").text(showtime.display);
+            });
+
+            $("#reset2").click(function(){
+                showtime = aceptaTecla("r", crono2);
+                console.log("EN EL HTML: ",showtime);
+                $("#display2").text(showtime.display);
+                $("#tablepartials2").text(showtime.partials);
+            });
+
+            $("#partial2").click(function(){
+                showtime = aceptaTecla("p", crono2);
+                console.log("EN EL HTML: ",showtime);
+                $("#display2").text(showtime.display);
+                $("#tablepartials2").text(showtime.partials);
             });
         });
     </script>
