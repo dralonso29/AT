@@ -1,0 +1,29 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="utf-8">
+    <title>Papel Regalo</title>
+    <style type="text/css">
+        canvas {
+            border: 1px solid black;
+        }
+    </style>
+
+</head>
+
+<body>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="https://cdnjs.cloudflare.com/ajax/libs/jcanvas/21.0.1/jcanvas.js"></script>
+
+    <canvas id="mi_canvas" width="1000" height="1000">
+        <p>Texto alternativo para navegadores sin el API Canvas.</p>
+    </canvas>
+    <!-- Para probar el fichero html lanzamos: python3 -m http.server 7777
+    y nos vamos a 0.0.0.0:7777 en el navegador (en firefox me iba
+    ordenes de magnitud mas rapido que en chrome) -->
+    <script type="module" src="regalo.js"> </script>
+
+</body>
+
+</html>
