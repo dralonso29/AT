@@ -1,0 +1,74 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="utf-8">
+    <title>Practica 6.2</title>
+    <style type="text/css">
+        p {
+            font-size: 15px
+        }
+
+        #removeAll {
+            text-align: center;
+            margin: auto;
+            display: block;
+            font-size: 20px
+        }
+
+        #textRemove {
+            text-align: center;
+        }
+    </style>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.3.1/jquery.min.js"></script>
+    <script src="sesion.js"> </script>
+</head>
+
+<body>
+    <div>
+        <p id="msg"></p>
+    </div>
+    <br>
+    <br>
+    <div>
+        <button id="removeAll">Borrar registros</button>
+    </div>
+    <div>
+        <p id="textRemove"></p>
+    </div>
+    <script>
+        $(document).ready(function() {
+            let info = newInfo();
+
+            let options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            function error(err) {
+                console.warn(`ERROR(${err.code}): ${err.message}`);
+            };
+
+            function success(pos) {
+                let x = pos.coords;
+                info.lat = x.latitude;
+                info.long = x.longitude;
+                info.accuracy = x.accuracy;
+                let msg = showMessage(info);
+                console.log(msg);
+                $("#msg").text(msg);
+            }
+
+            $("#removeAll").click(function() {
+                deleteAll();
+                $("#textRemove").text("Registros borrados");
+            });
+
+            navigator.geolocation.getCurrentPosition(success, error, options);
+        });
+    </script>
+
+</body>
+
+</html>

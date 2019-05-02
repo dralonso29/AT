@@ -14,13 +14,12 @@ function put_base_circles(diam, x0, x1, y0, y1, color_base) {
     }
 }
 
-function put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob){
-    for (let x = x0; x <= x1; x +=100) {
-        for (let y = y0; y <= y1; y +=100) {
-            if ((Math.random() >= prob)) {
-                vjcanvas.rectangle(x, y, ancho, alto, color, color_borde, ancho_borde)
-            }
-        }
+function put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, nrectangles){
+    let i = 0;
+    while (i < nrectangles) {
+        let x = getRandom(x1, y1);
+        let y = getRandom(x1, y1);
+        vjcanvas.rectangle(x, y, ancho, alto, color, color_borde, ancho_borde);
     }
 }
 
@@ -63,14 +62,14 @@ function put_camouflage_jungle(x0, x1, y0, y1, colors) {
     color_borde = "black";
     ancho_borde = 1;
     prob = 0.6; // probabilidad de aparicion
-    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob);
+    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, 10);
     ancho = 30;
     alto = 30;
     color = colors[3];
     color_borde = "black";
     ancho_borde = 1;
     prob = 0.5; // probabilidad de aparicion
-    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob);
+    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, 10);
 };
 
 function put_camouflage_marine(x0, x1, y0, y1, colors) {
@@ -84,7 +83,7 @@ function put_camouflage_marine(x0, x1, y0, y1, colors) {
     color_borde = "black";
     ancho_borde = 1;
     prob = 0.6; // probabilidad de aparicion
-    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob);
+    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, 30);
     ancho = 30;
     alto = 30;
     color = colors[3];

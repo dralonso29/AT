@@ -177,9 +177,9 @@ function main() {
     // console.log("Contraseña: ", passwd);
     // console.log(passwValidator(passwd, 3, 3, 3, 3, 3));
     //
-    // passwd = "hola"
-    // console.log("Contraseña: ", passwd);
-    // console.log(passwValidator(passwd, "x", 3, -1, 3, 3));
+    passwd = "hola"
+    console.log("Contraseña: ", passwd);
+    console.log(passwValidator(passwd, "x", 3, -1, 3, 3));
     //
     // passwd = "hola"
     // console.log("Contraseña: ", passwd);

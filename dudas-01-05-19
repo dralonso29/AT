@@ -1,0 +1,16 @@
+-- Practica 5.3: funciones: Como se supone que tenemos que hacer lo de los titulos??
+
+-- Practica 6.1: JSON: cuales son los 8 atributos que tenemos que probar?
+Tengo un objeto en javascript asi:
+let objeto = {
+    numero:5,
+    string:"pepe",
+    array:[1,"jose",3],
+    booleano:true,
+    nada:null,
+    otroobjeto:{arraynum:[1,2,3], name:"luis"},
+};
+
+¿Que mas tendria que añadir?
+
+-- diapos apis_html5: Diapositivas 14 y 15: No entiendo el codigo. Que hace postMessage(x)?
