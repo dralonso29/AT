@@ -3,12 +3,23 @@
 // Released under MIT license
 
 let vc={   //  virtual coordinates, global object
-    max_x: undefined, 
+    max_x: undefined,
     max_y: undefined,
     min_x: undefined,
     min_y: undefined,
 };
 
+export function setText(x, y, text, color) {
+    let xg, yg;  // x graphical, y graphical
+    xg = convert_x(x);
+    yg = convert_y(y);
+
+    $('canvas').drawText({
+          x: xg, y: yg,
+          text: text,
+          fillStyle: color
+    });
+};
 
 export function set_coords(
     min_x, max_x, min_y, max_y, correct_ratio=true){
@@ -56,11 +67,11 @@ export function height_transform(y){
 
 
 export function rectangle(x, y, width, height, color, border_color, border_width) {
-    let xg, yg;  // x graphical, y graphical 
-    let g_width, g_height;  // graphical width and height 
+    let xg, yg;  // x graphical, y graphical
+    let g_width, g_height;  // graphical width and height
     xg = convert_x(x);
     yg = convert_y(y);
-     
+
     g_width = width_transform(width);
     g_height = height_transform(height);
 
@@ -119,7 +130,7 @@ export function line( dots, color, width){
       strokeWidth: width,
       rounded: true
     };
-    
+
     // Add the points from the array to the object
     for (var p = 0; p < dots.length; p += 1) {
       obj['x'+(p+1)] = convert_x(dots[p][0]);
@@ -127,7 +138,7 @@ export function line( dots, color, width){
       //obj['x'+(p+1)] = dots[p][0];
       //obj['y'+(p+1)] = dots[p][1];
     }
-    
+
     // Draw the line
     $('canvas').drawLine(obj);
 }
@@ -165,8 +176,8 @@ export function hsl_to_color(h, s, l){
     } else if (s < 0){
         s = 0;
     }
-  
-    let rval =  "hsl(" + String(h) + ", " +  String(s) + "%, " 
+
+    let rval =  "hsl(" + String(h) + ", " +  String(s) + "%, "
         + String(l) + "%)"
     return rval
 }
@@ -200,5 +211,3 @@ export function dot(x, y, color, ancho) {
         height: ancho
     });
 }
-
-
