@@ -52,9 +52,9 @@
     <script>
         $(document).ready(function() {
             let crono = newCrono();
-            let show = {};
+            let showtime = {};
             let crono2 = newCrono();
-            let show2 = {};
+            let showtime2 = {};
             $("#ss").click(function(){
                 showtime = aceptaTecla("s", crono);
                 //console.log("EN EL HTML: ",showtime);
@@ -82,60 +82,32 @@
             });
 
             $("#ss2").click(function(){
-                showtime = aceptaTecla("s", crono2);
-                console.log("EN EL HTML: ",showtime);
-                $("#display2").text(showtime.display);
+                showtime2 = aceptaTecla("s", crono2);
+                console.log("EN EL HTML: ",showtime2);
+                $("#display2").text(showtime2.display);
             });
 
             $("#reset2").click(function(){
-                showtime = aceptaTecla("r", crono2);
-                console.log("EN EL HTML: ",showtime);
-                $("#display2").text(showtime.display);
-                $("#tablepartials2").text(showtime.partials);
+                showtime2 = aceptaTecla("r", crono2);
+                console.log("EN EL HTML: ",showtime2);
+                $("#display2").text(showtime2.display);
+                $("#tablepartials2").text(showtime2.partials);
             });
 
             $("#partial2").click(function(){
-                showtime = aceptaTecla("p", crono2);
-                console.log("EN EL HTML: ",showtime);
-                $("#display2").text(showtime.display);
-                $("#tablepartials2").text(showtime.partials);
+                showtime2 = aceptaTecla("p", crono2);
+                console.log("EN EL HTML: ",showtime2);
+                $("#display2").text(showtime2.display);
+                $("#tablepartials2").text([]);
+                for (let i = 0; i < showtime2.partials.length; i++) {
+                    //console.log("Elemento ",i," de partials: ", showtime.partials[i]);
+                    let text;
+                    text = '<tr><td>'+showtime2.partials[i]+'</td></tr>';
+                    $("#tablepartials2").append(text);
+                }
             });
         });
     </script>
-
-    <!-- <script>
-        let texto;
-        texto = '<tr class="hora"><td>' +moment().format() + '</td></tr>';
-        $("#tabla_horas").append(texto);
-        $(document).ready(function() {
-            let crono = {};
-            crono.display = "00:00:00:00";
-            crono.partials = [];
-            crono.start = null;
-            crono.acumulado = 0;
-            status = 1;
-            let show = {};
-            $("#ss2").click(function(){
-                showtime = aceptaTecla("s", crono);
-                console.log("EN EL HTML: ",showtime);
-                $("#display2").text(showtime.display);
-            });
-
-            $("#reset2").click(function(){
-                showtime = aceptaTecla("r", crono);
-                console.log("EN EL HTML: ",showtime);
-                $("#display2").text(showtime.display);
-                $("#tablepartials2").text(showtime.partials);
-            });
-
-            $("#partial2").click(function(){
-                showtime = aceptaTecla("p", crono);
-                console.log("EN EL HTML: ",showtime);
-                $("#display2").text(showtime.display);
-                $("#tablepartials2").text(showtime.partials);
-            });
-        });
-    </script> -->
 </body>
 
 </html>

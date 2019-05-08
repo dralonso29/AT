@@ -1,0 +1,19 @@
+Etiqueta meta: se usa para los metadatos (cuanto mejor optimizados, mejores busquedas en el navegador)
+Etiqueta pre: sirve para preformatear texto. Ejemplo:
+<pre>
+Estas 2 líneas están tabuladas:
+2005&#09;Esta línea usa un espacio tabular.
+&#09;Esta línea también usa un espacio tabular.
+
+Esta línea no usa un espacio tabular.
+</pre>
+
+El resultado podría ser algo como esto:
+
+Estas 2 líneas están tabuladas:
+2005 	 Esta línea usa un espacio tabular.
+	 Esta línea también usa un espacio tabular.
+
+Esta línea no usa un espacio tabular.
+
+

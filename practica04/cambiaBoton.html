@@ -13,7 +13,7 @@
 </head>
 
 <body>
-    <button id="boton01">Ver foto</button>
+    <button data-toggle="tooltip" title="Show or hide a photo" id="boton01">Ver foto</button>
     <div id="marco_foto" class="oculto">
         <img src="images/URJC.png" alt="Foto URJC">
     </div>
@@ -27,6 +27,7 @@
                     $("#boton01").text("Ocultar foto");
                 }
             });
+            $('[data-toggle="tooltip"]').tooltip();
         });
     </script>
 </body>

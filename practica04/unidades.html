@@ -10,9 +10,9 @@
 
 <body>
     <h1>Velocity converter</h1>
-    <button id="button01">m/s</button>
-    <button id="button02">km/h</button>
-    <button id="button03">mph</button>
+    <button data-toggle="tooltip1" title="datos en m/s" id="button01">m/s</button>
+    <button data-toggle="tooltip2" title="datos en k/h" id="button02">km/h</button>
+    <button data-toggle="tooltip3" title="datos en mph" id="button03">mph</button>
     <br>
     <br>
     <div id="v_in">20</div>
@@ -37,6 +37,9 @@
                 v_out = converter(v, "mph");
                 $("#v_out").text(v_out+" mph");
             });
+            $('[data-toggle="tooltip1"]').tooltip();
+            $('[data-toggle="tooltip2"]').tooltip();
+            $('[data-toggle="tooltip3"]').tooltip();
         });
     </script>
 </body>

@@ -1,0 +1,100 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+    <title>Donde esta mi coche</title>
+    <meta charset="utf-8">
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <link rel="stylesheet" href="https://unpkg.com/leaflet@1.2.0/dist/leaflet.css" integrity="sha512-M2wvCLH6DSRazYeZRIm1JnYyh22purTM+FDB5CsyxtQJYeKq83arPe5wgbNmcFXGqiSH2XR8dT/fJISVA1r/zQ==" crossorigin="" />
+    <script src="https://unpkg.com/leaflet@1.2.0/dist/leaflet.js" integrity="sha512-lInM/apFSqyy1o6s89K4iQUKg6ppXEgsVxT35HbzUupEVRh2Eu9Wdl4tHj7dZO0s1uvplcYGmt3498TtHq+log==" crossorigin=""></script>
+    <style>
+        #id_mapa {
+            height: 400px;
+        }
+        button {
+            margin: auto;
+            display: block;
+        }
+    </style>
+</head>
+
+<body>
+    <div id="id_mapa"></div>
+    <div id="botones">
+        <br>
+        <button type="button" id="save">Guardar posicion</button>
+        <br>
+        <button type="button" id="delete">Borrar posicion</button>
+    </div>
+
+    <script>
+        'use strict'
+        $(document).ready(function() {
+            let key = "coche";
+
+            $("#delete").hide(); // al cargar la pagina el boton delete estara oculto
+
+            let options = {
+                enableHighAccuracy: true,
+                timeout: 5000,
+                maximumAge: 0
+            };
+
+            function error(err) {
+                console.warn(`ERROR(${err.code}): ${err.message}`);
+            };
+
+            function success(pos) {
+                let x = pos.coords;
+                let latitud = x.latitude;
+                let longitud = x.longitude;
+                let zoom = 14;
+                let mi_mapa = L.map('id_mapa').setView([latitud, longitud], zoom);
+                L.tileLayer('http://{s}.tile.osm.org/{z}/{x}/{y}.png', {
+                    attribution: '&copy; <a href="http://osm.org/copyright">OpenStreetMap</a>'
+                }).addTo(mi_mapa);
+
+                let coord_user = [latitud, longitud];
+                let mi_marcador = L.marker(coord_user).addTo(mi_mapa);
+                mi_marcador.bindPopup("Estas aquí").openPopup();
+                handleClientCar(mi_mapa, latitud, longitud);
+            }
+
+            function handleClientCar(map, latitude_user, longitude_user){
+                let pos_coche = localStorage.getItem(key);
+                console.log("Posicion del coche: ",pos_coche);
+                if (pos_coche !== null) {
+                    pos_coche = JSON.parse(pos_coche);
+                    console.log("Tipo datos pos coche: ", typeof pos_coche)
+                    let mi_marcador_coche = L.marker(pos_coche).addTo(map); // hay que meterle un array, no vale con un string
+                    mi_marcador_coche.bindPopup("Aqui esta tu coche").openPopup();
+                    $("#delete").show();
+                }
+
+                $("#save").click(function(){
+                    let pos_coche = [latitude_user, longitude_user];
+                    //let pos_coche = [40, -3]; // Para probar ubicaciones del coche
+                    console.log("Posicion del coche: ",pos_coche, " Tipo: ", typeof(pos_coche));
+                    localStorage.removeItem(key);
+                    localStorage.setItem(key, JSON.stringify(pos_coche));  //actualizamos el valor de la posicion del coche
+                    console.log("Guardamos la pos del coche: ",localStorage.getItem(key)," " ,typeof(localStorage.getItem(key)));
+                    let mi_marcador_coche = L.marker(pos_coche).addTo(map); // hay que meterle un array, no vale con un string
+                    mi_marcador_coche.bindPopup("Aqui esta tu coche").openPopup();
+                    $("#delete").show(); // mostramos el boton de borrado porque ahora hay algo que borrar
+                });
+
+                $("#delete").click(function(){
+                    localStorage.removeItem(key);
+                    console.log("Borramos la pos del coche: ",localStorage.getItem(key)," " ,typeof(localStorage.getItem(key)));
+                    $("#delete").hide();
+                });
+            }
+
+            navigator.geolocation.getCurrentPosition(success, error, options);
+        });
+    </script>
+
+
+</body>
+
+</html>

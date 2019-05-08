@@ -46,7 +46,7 @@ Linea 12: Indica que la clase toledo se pinta de azul. Si nos fijamos, tiene que
       color: blue;
     }
 
-Linea 16: Indica que la clase cuenca dentro de la clase toledo la alinee al centro
+Linea 16: Indica que la clase cuenca o la clase toledo la alinean al centro
 .toledo, .cuenca {
       text-align: center;
     }
