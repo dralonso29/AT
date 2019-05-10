@@ -1,0 +1,71 @@
+<!DOCTYPE html>
+<html lang="es-ES">
+
+<head>
+    <meta charset="utf-8">
+    <title>Cronometro</title>
+    <script src="https://ajax.googleapis.com/ajax/libs/jquery/3.2.1/jquery.min.js"></script>
+    <script src="crono2.js"></script>
+    <style>
+        div {
+            text-align: center;
+        }
+        table {
+            text-align: center;
+        }
+    </style>
+</head>
+
+<body>
+    <div><h1 id="display">00:00:00:00</h1></div>
+    <div class="buttons">
+        <button id="otro">reset</button>
+        <button id="ss">start</button>
+    </div>
+    <table align="center" id="tablepartials"></table>
+    <script>
+    $(document).ready(function() {
+        let crono = newCrono();
+        let showtime = {};
+        $("#ss").click(function(){
+            showtime = aceptaTecla("s", crono);
+            //console.log("EN EL HTML: ",showtime);
+            if ($("#ss").text() === "start") {
+              $("#ss").text("stop");
+              $("#otro").text("partial");
+            }else {
+              $("#ss").text("start");
+              $("#otro").text("reset");
+            }
+            $("#display").text(showtime.display);
+        });
+
+        $("#otro").click(function(){
+            if ($("#otro").text() === "reset") {
+              showtime = aceptaTecla("r", crono);
+              //console.log("EN EL HTML: ",showtime);
+              $("#display").text(showtime.display);
+              $("#tablepartials").text(showtime.partials);
+            }else{
+              showtime = aceptaTecla("p", crono);
+              console.log("EN EL HTML: ",showtime);
+              $("#display").text(showtime.display);
+              $("#tablepartials").text([]);
+              for (let i = 0; i < showtime.partials.length; i++) {
+                  //console.log("Elemento ",i," de partials: ", showtime.partials[i]);
+                  let text;
+                  text = '<tr><td>'+showtime.partials[i]+'</td></tr>';
+                  $("#tablepartials").append(text);
+              }
+            }
+
+        });
+
+        $("#partial").click(function(){
+
+        });
+    });
+    </script>
+</body>
+
+</html>
