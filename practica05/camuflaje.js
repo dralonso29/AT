@@ -14,15 +14,6 @@ function put_base_circles(diam, x0, x1, y0, y1, color_base) {
     }
 }
 
-function put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, nrectangles){
-    let i = 0;
-    while (i < nrectangles) {
-        let x = getRandom(x1, y1);
-        let y = getRandom(x1, y1);
-        vjcanvas.rectangle(x, y, ancho, alto, color, color_borde, ancho_borde);
-    }
-}
-
 function getRandom(max, min){
     return Math.round((Math.random()*(max-min)+min));
 }
@@ -62,14 +53,14 @@ function put_camouflage_jungle(x0, x1, y0, y1, colors) {
     color_borde = "black";
     ancho_borde = 1;
     prob = 0.6; // probabilidad de aparicion
-    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, 10);
+    put_random(x0, x1, y0, y1, color, prob);
     ancho = 30;
     alto = 30;
     color = colors[3];
     color_borde = "black";
     ancho_borde = 1;
     prob = 0.5; // probabilidad de aparicion
-    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, 10);
+    put_random(x0, x1, y0, y1, color, prob);
 };
 
 function put_camouflage_marine(x0, x1, y0, y1, colors) {
@@ -77,13 +68,6 @@ function put_camouflage_marine(x0, x1, y0, y1, colors) {
     let most_freq_colors = [colors[0], colors[1]]
     put_base_circles(diam, x0, x1, y0, y1, most_freq_colors);
     let ancho, alto, color, color_borde, ancho_borde, prob;
-    ancho = 80;
-    alto = 40;
-    color = colors[2];
-    color_borde = "black";
-    ancho_borde = 1;
-    prob = 0.6; // probabilidad de aparicion
-    put_rectangles(x0, x1, y0, y1, ancho, alto, color, color_borde, ancho_borde, prob, 30);
     ancho = 30;
     alto = 30;
     color = colors[3];
